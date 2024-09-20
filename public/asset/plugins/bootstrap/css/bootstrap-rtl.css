@@ -1,0 +1,24 @@
+/* -------------------------------- progress -------------------------------- */
+.progress{
+    justify-content: flex-end;
+}
+
+.progress {
+    margin-top: 1rem;
+}
+
+/* -------------------------------- accordion-button -------------------------------- */
+
+.accordion-button::after {
+    margin-left:unset;
+    margin-right: auto;
+}
+
+/* -------------------------------- modal-button -------------------------------- */
+
+
+.modal-header .close {
+
+    margin: -0.5rem -0.5rem -0.5rem;
+
+}

@@ -1,0 +1,95 @@
+
+.text-a-c {
+    text-align: center;
+}
+
+.f-l-W-600 {
+    float: left;
+    width: 600px;
+}
+
+.float-l{
+    float: left;
+
+}
+
+.width-60 {
+    width: 60px;
+}
+
+.width-200 {
+    width: 200px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.height-60 {
+    height: 60px;
+}
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+
+.f-r {
+    float: right;
+}
+
+.border-1 {
+    border: 1px solid rgba(0, 0, 0, .3);
+}
+
+.border-t-1 {
+    border-top: 1px solid rgba(0, 0, 0, .3);
+}
+
+.border-l-1 {
+    border-left: 1px solid rgba(0, 0, 0, .3);
+}
+
+.border-r-1 {
+    border-right: 1px solid rgba(0, 0, 0, .3);
+}
+
+.border-b-1 {
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+}
+
+.line-h-20 {
+    line-height: 20px;
+}
+
+.font-w-b {
+    font-weight: bold;
+}
+
+.border-n {
+    border: none !important;
+}
+
+
+.mid_section {
+    width: 95%;
+    margin: auto !important;
+}
+
+.company_logo{
+    /*border: 1px solid red;*/
+    width: 80px !important;
+    height: 80px !important;
+}
+.company_logo img{
+    /*border: 1px solid red;*/
+    width: 100%;
+    height: 100%;
+}
+
+
+.requisition_no{
+    width: 250px;
+
+}
+
+

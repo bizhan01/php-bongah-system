@@ -1,0 +1,128 @@
+
+DELIMITER $$
+
+		CREATE PROCEDURE `GetDrCrByBranchHeadTypeId`
+        (
+            IN b_id int,
+            IN i_e_h_id int,
+            IN h_type int
+        )
+        BEGIN
+             SELECT transactions.dr , transactions.cr
+             FROM
+             transactions
+             INNER JOIN income_expense_heads
+             ON transactions.income_expense_head_id=income_expense_heads.id
+             WHERE branch_id=b_id AND income_expense_head_id =i_e_h_id AND type=h_type;
+
+
+        END $$
+DELIMITER ;
+
+
+
+DELIMITER $$
+        CREATE PROCEDURE `GetBalanceByBranchIdBankCashId`
+        (IN BranchID int, IN BankCashID int)
+        BEGIN
+            SELECT IFNULL(SUM(transactions.cr) , 0 ) - IFNULL( SUM(transactions.dr), 0)  AS Balance
+            FROM
+            transactions
+            INNER JOIN bank_cashes
+            ON transactions.bank_cash_id=bank_cashes.id
+            WHERE branch_id=BranchID AND bank_cash_id =BankCashID;
+        END $$
+DELIMITER ;
+
+
+
+
+
+DELIMITER $$
+CREATE PROCEDURE `GetUniqueBranchIDName`
+        (
+        	IN b_id INT ,
+	        IN v_date_start VARCHAR(255),
+	        IN v_date_end VARCHAR(255)
+        )
+        BEGIN
+
+            IF ( b_id = 0 AND v_date_start IS NULL  ) THEN
+        	BEGIN
+
+        		 SELECT DISTINCT branch_id , name
+    			 FROM transactions
+				 INNER JOIN branches
+				 ON transactions.branch_id =branches.id
+				 ORDER BY branch_id asc;
+
+    	  	END;
+
+    	  	ELSEIF (b_id > 0 AND v_date_start IS  NULL) THEN
+    	  	BEGIN
+
+    			 SELECT DISTINCT branch_id , name
+    			 FROM transactions
+				 INNER JOIN branches
+				 ON transactions.branch_id =branches.id
+				 WHERE transactions.branch_id=b_id
+				 ORDER BY branch_id asc;
+
+    	  	END;
+
+    	  	ELSEIF (b_id =0 AND v_date_start IS NOT NULL) THEN
+    	  	BEGIN
+
+    	  		 SELECT DISTINCT branch_id , name
+    			 FROM transactions
+				 INNER JOIN branches
+				 ON transactions.branch_id =branches.id
+				 WHERE voucher_date BETWEEN v_date_start AND v_date_end
+				 ORDER BY branch_id asc;
+
+    	  	END;
+
+    	  	ELSE
+            BEGIN
+
+    			 SELECT DISTINCT branch_id , name
+    			 FROM transactions
+				 INNER JOIN branches
+				 ON transactions.branch_id =branches.id
+				 WHERE branch_id=b_id AND voucher_date BETWEEN v_date_start AND v_date_end
+				 ORDER BY branch_id asc;
+
+            END;
+
+         END IF;
+
+        END $$
+
+ DELIMITER ;
+
+
+
+
+
+
+DELIMITER $$
+
+        CREATE PROCEDURE `GetUniqueIncomeExpenseHeadByBranch`
+        (IN b_id int)
+        BEGIN
+
+              SELECT DISTINCT transactions.income_expense_head_id ,
+              income_expense_heads.name, income_expense_heads.`type`
+              FROM
+              transactions
+              INNER JOIN income_expense_heads
+              ON transactions.income_expense_head_id=income_expense_heads.id
+              WHERE branch_id=b_id AND income_expense_head_id IS NOT NULL
+              ORDER BY income_expense_head_id asc;
+        END
+
+        END $$
+DELIMITER ;
+
+
+
